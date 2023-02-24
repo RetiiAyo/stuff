@@ -114,7 +114,7 @@ local supported_games = database.scripts.von.supported_games
 local gameSupported = false
 
 for i, v in pairs(supported_games) do
-	if gameId == v then
+	if v == gameId then
 		gameSupported = true
 	end
 end
