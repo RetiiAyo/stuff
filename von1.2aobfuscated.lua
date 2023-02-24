@@ -114,7 +114,7 @@ local supported_games = database.scripts.von.supported_games
 local gameSupported = false
 
 for i, v in pairs(supported_games) do
-	if v == gameId then
+	if supported_games[gameId] then
 		gameSupported = true
 	end
 end
@@ -122,5 +122,5 @@ end
 if gameSupported == true then
 	title.Text = "VON "..ver.." | "..MarketPlaceService:GetProductInfo(game.PlaceId).Name
 else
-	title.Text = "VON "..ver.." | "..MarketPlaceService:GetProductInfo(game.PlaceId).Name.." (NOT SUPPORTED)"
+	title.Text = "VON "..ver.." | "..MarketPlaceService:GetProductInfo(game.PlaceId).Name.." (Err. 101)"
 end
