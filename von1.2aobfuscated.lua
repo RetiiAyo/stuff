@@ -14,12 +14,16 @@ local thisgame = Instance.new("TextButton")
 local UICorner_2 = Instance.new("UICorner")
 local player = Instance.new("TextButton")
 local UICorner_3 = Instance.new("UICorner")
+local games = Instance.new("TextButton")
+local UICorner_4 = Instance.new("UICorner")
 local line = Instance.new("Frame")
 local selectionFrames = Instance.new("Frame")
 local gameSelect = Instance.new("ScrollingFrame")
 local UIListLayout_2 = Instance.new("UIListLayout")
 local error = Instance.new("TextLabel")
 local UIGradient_2 = Instance.new("UIGradient")
+local gamesSelect = Instance.new("ScrollingFrame")
+local UIListLayout_3 = Instance.new("UIListLayout")
 
 --Properties:
 
@@ -92,6 +96,19 @@ player.TextWrapped = true
 UICorner_3.CornerRadius = UDim.new(0, 10)
 UICorner_3.Parent = player
 
+games.Name = "games"
+games.Parent = selection
+games.BackgroundColor3 = Color3.fromRGB(37, 37, 40)
+games.Size = UDim2.new(0, 90, 0, 25)
+games.Font = Enum.Font.GothamMedium
+games.Text = "GAMES"
+games.TextColor3 = Color3.fromRGB(255, 255, 255)
+games.TextSize = 15.000
+games.TextWrapped = true
+
+UICorner_4.CornerRadius = UDim.new(0, 10)
+UICorner_4.Parent = games
+
 line.Name = "line"
 line.Parent = main
 line.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -141,6 +158,20 @@ UIGradient_2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fr
 UIGradient_2.Rotation = 90
 UIGradient_2.Parent = error
 
+gamesSelect.Name = "gamesSelect"
+gamesSelect.Parent = selectionFrames
+gamesSelect.Active = true
+gamesSelect.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+gamesSelect.BackgroundTransparency = 1.000
+gamesSelect.Size = UDim2.new(1, 0, 1, 0)
+gamesSelect.CanvasSize = UDim2.new(0, 0, 1, 0)
+gamesSelect.ScrollBarThickness = 5
+
+UIListLayout_3.Parent = gamesSelect
+UIListLayout_3.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UIListLayout_3.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout_3.Padding = UDim.new(0, 5)
+
 --
 
 von.ResetOnSpawn = false
@@ -157,6 +188,7 @@ local ver = database.scripts.von.version
 local supported_games = database.scripts.von.supported_games
 local gameSupported = false
 local featuresLocalization
+local featuresTable = {}
 
 for i, v in pairs(supported_games) do
 	if supported_games[gameId] then
@@ -164,8 +196,10 @@ for i, v in pairs(supported_games) do
 	end
 end
 
-function createFeature(type, name, parent)
-	if type == "bool" then
+function createFeature(typ, nam, parent)
+	if typ == "bool" then
+		featuresTable[nam] = {type = typ, name = nam, enabled = false, text = nil}
+
 		local Template = Instance.new("Frame")
 		local UICorner = Instance.new("UICorner")
 		local boolType = Instance.new("Frame")
@@ -217,7 +251,7 @@ function createFeature(type, name, parent)
 		title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		title.BackgroundTransparency = 1.000
 		title.Size = UDim2.new(0, 200, 1, 0)
-		title.Text = name
+		title.Text = nam
 		title.Font = Enum.Font.GothamBlack
 		title.TextColor3 = Color3.fromRGB(255, 255, 255)
 		title.TextScaled = true
@@ -228,10 +262,12 @@ function createFeature(type, name, parent)
 		UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.47, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(146, 164, 182))}
 		UIGradient.Rotation = 90
 		UIGradient.Parent = title
-	elseif type == "text" then
+	elseif typ == "text" then
+		featuresTable[nam] = {type = typ, name = nam, enabled = nil, text = ""}
+
 		local Template = Instance.new("Frame")
 		local UICorner = Instance.new("UICorner")
-		local boolType = Instance.new("Frame")
+		local boolType = Instance.new("TextButton")
 		local UICorner_2 = Instance.new("UICorner")
 		local textType = Instance.new("TextBox")
 		local UICorner_3 = Instance.new("UICorner")
@@ -280,7 +316,7 @@ function createFeature(type, name, parent)
 		title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		title.BackgroundTransparency = 1.000
 		title.Size = UDim2.new(0, 200, 1, 0)
-		title.Text = name
+		title.Text = nam
 		title.Font = Enum.Font.GothamBlack
 		title.TextColor3 = Color3.fromRGB(255, 255, 255)
 		title.TextScaled = true
@@ -292,6 +328,98 @@ function createFeature(type, name, parent)
 		UIGradient.Rotation = 90
 		UIGradient.Parent = title
 	end
+end
+
+function createSupportedGame(image, name, parent)
+	local Template2 = Instance.new("Frame")
+	local UICorner = Instance.new("UICorner")
+	local logo = Instance.new("ImageLabel")
+	local UICorner_2 = Instance.new("UICorner")
+	local title = Instance.new("TextLabel")
+	local UIGradient = Instance.new("UIGradient")
+	local supported = Instance.new("TextLabel")
+	local UIGradient_2 = Instance.new("UIGradient")
+	local play = Instance.new("ImageButton")
+	local UICorner_3 = Instance.new("UICorner")
+
+	--Properties:
+
+	Template2.Name = "Template2"
+	Template2.Parent = parent
+	Template2.BackgroundColor3 = Color3.fromRGB(50, 50, 54)
+	Template2.Size = UDim2.new(0, 300, 0, 75)
+
+	UICorner.CornerRadius = UDim.new(0, 10)
+	UICorner.Parent = Template2
+
+	logo.Name = "logo"
+	logo.Parent = Template2
+	logo.AnchorPoint = Vector2.new(0.5, 0.5)
+	logo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	logo.Position = UDim2.new(0.119999997, 0, 0.5, 0)
+	logo.Size = UDim2.new(0, 50, 0, 50)
+	logo.Image = image
+
+	UICorner_2.CornerRadius = UDim.new(0, 10)
+	UICorner_2.Parent = logo
+
+	title.Name = "title"
+	title.Parent = Template2
+	title.AnchorPoint = Vector2.new(0.5, 0.5)
+	title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	title.BackgroundTransparency = 1.000
+	title.BorderColor3 = Color3.fromRGB(27, 42, 53)
+	title.Position = UDim2.new(0.5, 0, 0.370000005, 0)
+	title.Size = UDim2.new(0, 150, 0, 25)
+	title.Text = name
+	title.Font = Enum.Font.GothamBold
+	title.TextColor3 = Color3.fromRGB(255, 255, 255)
+	title.TextScaled = true
+	title.TextSize = 14.000
+	title.TextWrapped = true
+	title.TextXAlignment = Enum.TextXAlignment.Left
+
+	UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.47, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(146, 164, 182))}
+	UIGradient.Rotation = 90
+	UIGradient.Parent = title
+
+	supported.Name = "supported"
+	supported.Parent = Template2
+	supported.AnchorPoint = Vector2.new(0.5, 0.5)
+	supported.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	supported.BackgroundTransparency = 1.000
+	supported.BorderColor3 = Color3.fromRGB(27, 42, 53)
+	supported.Position = UDim2.new(0.5, 0, 0.649999976, 0)
+	supported.Size = UDim2.new(0, 150, 0, 15)
+	supported.Font = Enum.Font.GothamBold
+	supported.Text = "(SUPPORTED)"
+	supported.TextColor3 = Color3.fromRGB(4, 255, 0)
+	supported.TextScaled = true
+	supported.TextSize = 14.000
+	supported.TextWrapped = true
+	supported.TextXAlignment = Enum.TextXAlignment.Left
+
+	UIGradient_2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(0.47, Color3.fromRGB(255, 255, 255)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(146, 164, 182))}
+	UIGradient_2.Rotation = 90
+	UIGradient_2.Parent = supported
+
+	play.Name = "play"
+	play.Parent = Template2
+	play.AnchorPoint = Vector2.new(0.5, 0.5)
+	play.BackgroundColor3 = Color3.fromRGB(61, 176, 29)
+	play.Position = UDim2.new(0.850000024, 0, 0.5, 0)
+	play.Size = UDim2.new(0, 50, 0, 50)
+	play.Image = "rbxassetid://12597928866"
+
+	UICorner_3.CornerRadius = UDim.new(0, 10)
+	UICorner_3.Parent = play
+end
+
+for i, v in pairs(supported_games) do
+	local image = MarketPlaceService:GetProductInfo(v).Image
+	local name = MarketPlaceService:GetProductInfo(v).Name
+	local id = v
+	createSupportedGame(image, name, gamesSelect)
 end
 
 if gameSupported == true then
@@ -308,8 +436,14 @@ thisgame.Activated:Connect(function()
 	for i, v in pairs(selection:GetChildren()) do
 		if v.Name ~= "UIListLayout" then
 			v.BackgroundColor3 = Color3.fromRGB(37, 37, 40)
-			gameSelect.Visible = true
 			error.Visible = false
+			if gameSupported == true then
+				gameSelect.Visible = true
+				gamesSelect.Visible = false
+			else
+				error.Text = "Err. 101 | Game not supported."
+				error.Visible = true
+			end
 		end
 	end
 	thisgame.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
@@ -320,9 +454,22 @@ player.Activated:Connect(function()
 		if v.Name ~= "UIListLayout" then
 			v.BackgroundColor3 = Color3.fromRGB(37, 37, 40)
 			gameSelect.Visible = false
+			gamesSelect.Visible = false
 			error.Visible = true
 			error.Text = "Err. 103 | Page not found."
 		end
 	end
 	player.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+end)
+
+games.Activated:Connect(function()
+	for i, v in pairs(selection:GetChildren()) do
+		if v.Name ~= "UIListLayout" then
+			v.BackgroundColor3 = Color3.fromRGB(37, 37, 40)
+			gameSelect.Visible = false
+			gamesSelect.Visible = true
+			error.Visible = false
+		end
+	end
+	games.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
 end)
