@@ -197,6 +197,7 @@ for i, v in pairs(supported_games) do
 end
 
 function createFeature(typ, nam, parent)
+	if nam == "Args" then return end
 	if typ == "bool" then
 		featuresTable[nam] = {type = typ, name = nam, enabled = false, text = nil}
 
@@ -416,7 +417,7 @@ function createSupportedGame(image, name, parent)
 end
 
 for i, v in pairs(supported_games) do
-	local image = "https://assetgame.roblox.com/Game/Tools/ThumbnailAsset.ashx?aid="..v.."&fmt=png&wd=420&ht=420"
+	local image = "https://assetgame.roblox.com/Game/Tools/ThumbnailAsset.ashx?aid="..v["Args"].gameid.."&fmt=png&wd=420&ht=420"
 	local name = MarketPlaceService:GetProductInfo(v).Name
 	local id = v
 	createSupportedGame(image, name, gamesSelect)
