@@ -334,11 +334,10 @@ function createFeature(typ, nam, parent)
 	end
 end
 
-function createSupportedGame(image, name, parent)
+function createSupportedGame(image, name, parent, id)
 	local Template2 = Instance.new("Frame")
 	local UICorner = Instance.new("UICorner")
 	local logo = Instance.new("ImageLabel")
-	local UICorner_2 = Instance.new("UICorner")
 	local title = Instance.new("TextLabel")
 	local UIGradient = Instance.new("UIGradient")
 	local supported = Instance.new("TextLabel")
@@ -363,9 +362,6 @@ function createSupportedGame(image, name, parent)
 	logo.Position = UDim2.new(0.119999997, 0, 0.5, 0)
 	logo.Size = UDim2.new(0, 50, 0, 50)
 	logo.Image = image
-
-	UICorner_2.CornerRadius = UDim.new(0, 10)
-	UICorner_2.Parent = logo
 
 	title.Name = "title"
 	title.Parent = Template2
@@ -417,13 +413,18 @@ function createSupportedGame(image, name, parent)
 
 	UICorner_3.CornerRadius = UDim.new(0, 10)
 	UICorner_3.Parent = play
+	
+	play.Activated:Connect(function()
+		supported.Text = "TELEPORTING.."
+		game:GetService("TeleportService"):Teleport(id, game.Players.LocalPlayer)
+	end)
 end
 
 for i, v in pairs(supported_games) do
 	local image = "https://assetgame.roblox.com/Game/Tools/ThumbnailAsset.ashx?aid="..v["Args"].gameid.."&fmt=png&wd=420&ht=420"
 	local name = MarketPlaceService:GetProductInfo(tonumber(v["Args"].gameid)).Name
 	local id = tonumber(v["Args"].gameid)
-	createSupportedGame(image, name, gamesSelect)
+	createSupportedGame(image, name, gamesSelect, id)
 end
 
 if gameSupported == true then
