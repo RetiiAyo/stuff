@@ -6,7 +6,7 @@ return {
 			["enabled"] = true,
 			["supported_games"] = {
 				[625214705] = {
-					["Test"] = {type = "bool", name = "Test"}
+					["Args"] = {type = "bool", name = "Args", gameid = 625214705}
 				}
 			}
 
