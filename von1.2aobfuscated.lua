@@ -298,7 +298,7 @@ if gameSupported == true then
 	title.Text = "VON "..ver.." | "..MarketPlaceService:GetProductInfo(game.PlaceId).Name
 	featuresLocalization = supported_games[gameId]
 	for i, v in pairs(featuresLocalization) do
-		createFeature(v.type, v.name)
+		createFeature(v.type, v.name, selectionFrames.gameSelect)
 	end
 else
 	title.Text = "VON "..ver.." | "..MarketPlaceService:GetProductInfo(game.PlaceId).Name.." (Err. 101)"
