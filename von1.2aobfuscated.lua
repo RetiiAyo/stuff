@@ -416,7 +416,7 @@ function createSupportedGame(image, name, parent)
 end
 
 for i, v in pairs(supported_games) do
-	local image = MarketPlaceService:GetProductInfo(v).Image
+	local image = "https://assetgame.roblox.com/Game/Tools/ThumbnailAsset.ashx?aid="..v.."&fmt=png&wd=420&ht=420"
 	local name = MarketPlaceService:GetProductInfo(v).Name
 	local id = v
 	createSupportedGame(image, name, gamesSelect)
