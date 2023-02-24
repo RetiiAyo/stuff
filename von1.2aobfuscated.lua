@@ -3,6 +3,9 @@
 
 -- Instances:
 
+repeat wait() until game.Lighting:FindFirstChild("loaded")
+repeat wait() until game.Lighting.loaded.Value == true
+
 local von = Instance.new("ScreenGui")
 local main = Instance.new("Frame")
 local UICorner = Instance.new("UICorner")
@@ -418,8 +421,8 @@ end
 
 for i, v in pairs(supported_games) do
 	local image = "https://assetgame.roblox.com/Game/Tools/ThumbnailAsset.ashx?aid="..v["Args"].gameid.."&fmt=png&wd=420&ht=420"
-	local name = MarketPlaceService:GetProductInfo(v["Args"].gameid).Name
-	local id = v["Args"].gameid
+	local name = MarketPlaceService:GetProductInfo(tonumber(v["Args"].gameid)).Name
+	local id = tonumber(v["Args"].gameid)
 	createSupportedGame(image, name, gamesSelect)
 end
 
