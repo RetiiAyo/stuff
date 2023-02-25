@@ -6,7 +6,7 @@ return {
 			["enabled"] = true,
 			["supported_games"] = {
 				[625214705] = {
-					["Args"] = {type = "bool", name = "Args", gameid = 625214705, status = "(API_ERR)", statusColor = Color3.fromRGB(255, 251, 0)}
+					["Args"] = {type = "bool", name = "Args", gameid = 625214705}
 				}
 			}
 
