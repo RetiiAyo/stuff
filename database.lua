@@ -1,7 +1,7 @@
 return {
 	["scripts"] = {
 		["von"] = {
-			["key"] = "vonbeta.47dOInLAQGaT",
+			["key"] = "vonalpha.73xIbvAZkQafd",
 			["version"] = "1.2a",
 			["enabled"] = true,
 			["supported_games"] = {
