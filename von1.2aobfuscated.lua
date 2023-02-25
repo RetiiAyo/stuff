@@ -334,7 +334,7 @@ function createFeature(typ, nam, parent)
 	end
 end
 
-function createSupportedGame(image, name, parent, id, status, statusColor3)
+function createSupportedGame(image, name, parent, id, statu, statusColor3)
 	local Template2 = Instance.new("Frame")
 	local UICorner = Instance.new("UICorner")
 	local logo = Instance.new("ImageLabel")
@@ -392,7 +392,7 @@ function createSupportedGame(image, name, parent, id, status, statusColor3)
 	supported.Position = UDim2.new(0.5, 0, 0.649999976, 0)
 	supported.Size = UDim2.new(0, 150, 0, 15)
 	supported.Font = Enum.Font.GothamBold
-	supported.Text = status
+	supported.Text = tostring(statu)
 	supported.TextColor3 = statusColor3
 	supported.TextScaled = true
 	supported.TextSize = 14.000
