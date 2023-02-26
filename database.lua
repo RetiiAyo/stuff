@@ -14,6 +14,9 @@ return {
 					["JumpPower"] = {type = "text", name = "JumpPower"},
 					["HipHeight"] = {type = "text", name = "HipHeight"},
 				}
+				[4655652068] = {
+					["Args"] = {type = "bool", name = "Args", gameid = 4655652068}
+				}
 			}
 
 		}
